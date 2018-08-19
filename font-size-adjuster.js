@@ -8,18 +8,19 @@ function adjustLines(className, maxLines) {
 			lines = countLines(element);
 		}
 	}
-}
+	
+	function countLines(element) {
+		const divHeight = element.offsetHeight;
+		const computedHeight = getComputedStyle(element).lineHeight;
+		let lineHeight;
+		if(computedHeight === "normal") {
+			lineHeight = parseInt(getComputedStyle(element).fontSize)*1.2;
+		}
+		else {
+			lineHeight = parseInt(getComputedStyle(element).lineHeight);
+		}
+		const lines = divHeight / lineHeight;
+		return lines;
+	}
 
-function countLines(element) {
-	const divHeight = element.offsetHeight;
-  const computedHeight = getComputedStyle(element).lineHeight;
-  let lineHeight;
-  if(computedHeight === "normal") {
-    lineHeight = parseInt(getComputedStyle(element).fontSize)*1.2;
-  }
-	else {
-    lineHeight = parseInt(getComputedStyle(element).lineHeight);
-  }
-	const lines = divHeight / lineHeight;
-	return lines;
 }
